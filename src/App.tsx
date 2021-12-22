@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Navigate, useRoutes} from 'react-router-dom';
+import Main from './pages/main';
+import Page1 from './pages/page1';
+import Page2 from './pages/page2';
+import Page3 from './pages/page3'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const mainRoutes = {
+    path: '/',
+    element: <Main />,
+    children: [
+      {path: '*', element: <Navigate to='/404'/>},
+      {path: '1', element: <Page1 /> },
+      {path: '2', element: <Page2 /> },
+      {path: '3', element: <Page3 /> },
+    ]
+  }
+  const routing = useRoutes([mainRoutes]);
+
+  return <>{routing}</>
 }
 
 export default App;
